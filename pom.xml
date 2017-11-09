@@ -15,7 +15,6 @@
     <type>pom</type>
     <scope>provided</scope>
 </dependency>
-
 			<!-- Required by maven-compiler-plugin -->
 			<dependency>
 					<groupId>sun.jdk</groupId>
