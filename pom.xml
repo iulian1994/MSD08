@@ -1,0 +1,109 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.msd08</groupId>
+  <artifactId>MSD08</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>HRM</name>
+  <description>Hospital Resource Management</description>
+  <dependencyManagement>
+  <dependencies>
+			<!-- https://mvnrepository.com/artifact/org.jboss.spec/jboss-javaee-7.0 -->
+<dependency>
+    <groupId>org.jboss.spec</groupId>
+    <artifactId>jboss-javaee-7.0</artifactId>
+    <version>1.0.2.Final</version>
+    <type>pom</type>
+    <scope>provided</scope>
+</dependency>
+
+			<!-- Required by maven-compiler-plugin -->
+			<dependency>
+					<groupId>sun.jdk</groupId>
+					<artifactId>jconsole</artifactId>
+					<version>jdk</version>
+					<scope>system</scope>
+					<systemPath>C:\Program Files\Java\jdk1.8.0_31\lib\jconsole.jar</systemPath>
+			</dependency>	
+		</dependencies>
+	</dependencyManagement>
+
+	<dependencies>
+
+		<!-- JEE Generic Dependency: CDI, EJB, JPA ... -->
+		<dependency>
+			<groupId>javax</groupId>
+			<artifactId>javaee-api</artifactId>
+			<version>7.0</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- Import the JUnit 4 -->
+		<!-- https://mvnrepository.com/artifact/junit/junit -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
+			<scope>test</scope>
+		</dependency>
+
+
+		<!-- Import Arquillian dependencies -->
+		<!-- https://mvnrepository.com/artifact/org.jboss.arquillian.core/arquillian-core-api -->
+		<dependency>
+			<groupId>org.jboss.arquillian.core</groupId>
+			<artifactId>arquillian-core-api</artifactId>
+			<version>1.1.13.Final</version>
+			<scope>provided</scope>
+		</dependency>
+
+
+		<!-- https://mvnrepository.com/artifact/org.jboss.arquillian.junit/arquillian-junit-container -->
+		<dependency>
+			<groupId>org.jboss.arquillian.junit</groupId>
+			<artifactId>arquillian-junit-container</artifactId>
+			<version>1.1.13.Final</version>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.jboss.arquillian.extension/arquillian-transaction-jta -->
+		<dependency>
+			<groupId>org.jboss.arquillian.extension</groupId>
+			<artifactId>arquillian-transaction-jta</artifactId>
+			<version>1.0.5</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.jboss.arquillian.protocol/arquillian-protocol-servlet -->
+		<dependency>
+			<groupId>org.jboss.arquillian.protocol</groupId>
+			<artifactId>arquillian-protocol-servlet</artifactId>
+			<version>1.1.13.Final</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.wildfly/wildfly-arquillian-container-remote -->
+		<dependency>
+			<groupId>org.wildfly</groupId>
+			<artifactId>wildfly-arquillian-container-remote</artifactId>
+			<version>8.2.1.Final</version>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- Import the JAX-RS/RestEasy Client: to run REST remotely! (outside Arq.) -->
+		<!-- https://mvnrepository.com/artifact/org.jboss.resteasy/resteasy-client -->
+		<dependency>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>resteasy-client</artifactId>
+			<version>3.0.19.Final</version>
+			<scope>provided</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>resteasy-jackson-provider</artifactId>
+			<version>3.0.19.Final</version>
+			<scope>provided</scope>
+		</dependency>	
+  </dependencies>
+  
+</project>
