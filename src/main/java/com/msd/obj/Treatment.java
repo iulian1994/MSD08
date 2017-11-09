@@ -1,4 +1,4 @@
-package com.msd.cont;
+package com.msd.obj;
 
 public class Treatment {
 
