@@ -1,6 +1,9 @@
-import org.junit.Test;
+package org.app.service.rest.test;
+
 import java.util.logging.Logger;
+
 import javax.ws.rs.core.Response;
+
 //import org.jboss.resteasy.client.jaxrs.ResteasyClient;
 //import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
 //import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
@@ -16,8 +19,8 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 
-public class app {
-	private static Logger logger = Logger.getLogger(app.class.getName());
+public class TestDataServiceRest {
+	private static Logger logger = Logger.getLogger(TestDataServiceRest.class.getName());
 	private static String serviceURL = "http://localhost:8080/msdnew/rest/service";
 	
 	@BeforeClass
@@ -32,7 +35,8 @@ public class app {
         String value = response.readEntity(String.class);
         response.close(); 
         
-        System.out.println("REST Response masa... >>>>>>>>> " + value);
+        System.out.println("REST Response >>>>>>>>> " + value);
 	}
 
 }
+// https://github.com/wildfly/quickstart/tree/10.x/helloworld-rs

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+	<persistence-unit name="orcl">
+		<jta-data-source>java:/ORCL</jta-data-source>
+		<class>org.app.service.entities.HospitalAdmission</class>
+		<class>org.app.service.entities.Person</class>
+      <properties>
+         <!-- <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>  -->
+         <property name="hibernate.dialect" value="org.hibernate.dialect.Oracle10gDialect"/>
+         <property name="hibernate.hbm2ddl.auto" value="update"/>
+         <property name="hibernate.connection.driver_class" value="oracle.jdbc.driver.OracleDriver"/>
+         <property name="hibernate.connection.url" value="jdbc:oracle:thin:@localhost:1521:orcl"/>
+         <property name="hibernate.default_schema" value="javaapp"></property>
+         <property name="hibernate.connection.username" value="javaapp"/>
+         <property name="hibernate.connection.password" value="javaapp"/>
+      </properties>		
+      		
+	</persistence-unit>
+</persistence>

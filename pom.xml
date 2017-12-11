@@ -4,30 +4,52 @@
   <artifactId>MSD08</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <name>HRM</name>
-  <description>Hospital Resource Management</description>
+
+  <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <failOnMissingWebXml>false</failOnMissingWebXml>
+      
+        <!-- JBoss Wildfly dependency versions -->
+		<version.wildfly.maven.plugin>1.0.2.Final</version.wildfly.maven.plugin>
+		<version.jboss.spec.javaee.7.0>1.0.3.Final</version.jboss.spec.javaee.7.0>
+
+		<!-- other plug-in versions -->
+		<version.war.plugin>3.0.0</version.war.plugin>
+		
+		<!-- maven-compiler-plugin -->
+		<maven.compiler.target>1.8</maven.compiler.target>
+		<maven.compiler.source>1.8</maven.compiler.source>		
+		
+		<!-- <jdk.system.path>C:\Program Files\Java\jdk1.8.0_31</jdk.system.path> -->
+		<jdk.system.path>${env.JAVA_HOME}</jdk.system.path>	
+        
+    </properties>
+  
   <dependencyManagement>
   <dependencies>
-			<!-- https://mvnrepository.com/artifact/org.jboss.spec/jboss-javaee-7.0 -->
-<dependency>
-    <groupId>org.jboss.spec</groupId>
-    <artifactId>jboss-javaee-7.0</artifactId>
-    <version>1.0.2.Final</version>
-    <type>pom</type>
-    <scope>provided</scope>
-</dependency>
+			<dependency>
+			    <groupId>org.jboss.spec</groupId>
+			    <artifactId>jboss-javaee-7.0</artifactId>
+			    <version>1.0.2.Final</version>
+			    <type>pom</type>
+			    <scope>provided</scope>
+			</dependency>
+			<dependency>
+			    <groupId>org.wildfly.plugins</groupId>
+			    <artifactId>wildfly-maven-plugin</artifactId>
+			    <version>1.2.1.Final</version>
+			</dependency>
 			<!-- Required by maven-compiler-plugin -->
 			<dependency>
 					<groupId>sun.jdk</groupId>
 					<artifactId>jconsole</artifactId>
 					<version>jdk</version>
 					<scope>system</scope>
-					<systemPath>C:\Program Files\Java\jdk1.8.0_31\lib\jconsole.jar</systemPath>
+					<systemPath>${env.JAVA_HOME}\lib\jconsole.jar</systemPath>
 			</dependency>	
 		</dependencies>
 	</dependencyManagement>
-
 	<dependencies>
-
 		<!-- JEE Generic Dependency: CDI, EJB, JPA ... -->
 		<dependency>
 			<groupId>javax</groupId>
@@ -103,6 +125,47 @@
 			<version>3.0.19.Final</version>
 			<scope>provided</scope>
 		</dependency>	
+		
   </dependencies>
-  
+  <build>
+ 	 <finalName>msdnew</finalName>
+        <plugins>
+            <!-- For quick testing in Wildfly -->
+            
+            <plugin>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>3.0.0</version>
+				<configuration>
+					<!-- Java EE doesn't require web.xml, Maven needs to catch up! -->
+					<failOnMissingWebXml>false</failOnMissingWebXml>
+				</configuration>
+			</plugin>
+			<plugin>
+                <groupId>org.wildfly.plugins</groupId>
+                <artifactId>wildfly-maven-plugin</artifactId>
+                <version>1.2.1.Final</version>
+            </plugin>
+            <plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.10</version>
+				<configuration>
+					<skip>true</skip>
+				</configuration>
+				<executions>
+					<execution>
+						<id>default-test</id>
+						<phase>test</phase>
+						<goals>
+							<goal>test</goal>
+						</goals>
+						<configuration>
+							<skip>true</skip>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+        </plugins>
+    </build>
+  <packaging>war</packaging>
 </project>
