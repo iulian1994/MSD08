@@ -10,7 +10,7 @@
         <failOnMissingWebXml>false</failOnMissingWebXml>
       
         <!-- JBoss Wildfly dependency versions -->
-		<version.wildfly.maven.plugin>1.0.2.Final</version.wildfly.maven.plugin>
+		
 		<version.jboss.spec.javaee.7.0>1.0.3.Final</version.jboss.spec.javaee.7.0>
 
 		<!-- other plug-in versions -->
@@ -125,6 +125,11 @@
 			<version>3.0.19.Final</version>
 			<scope>provided</scope>
 		</dependency>	
+		<dependency>
+		    <groupId>javax.persistence</groupId>
+    		<artifactId>javax.persistence-api</artifactId>
+    		<version>2.2</version>
+		</dependency>
 		
   </dependencies>
   <build>
