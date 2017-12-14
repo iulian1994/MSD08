@@ -1,4 +1,5 @@
 package org.app.service.entities;
+
 import java.io.Serializable;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -34,3 +35,4 @@ public class AtomLink implements Serializable {
 	}
 	public AtomLink() { }	
 }
+

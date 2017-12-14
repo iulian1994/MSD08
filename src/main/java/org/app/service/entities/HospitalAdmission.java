@@ -28,24 +28,13 @@ private static final long serialVersionUID = -9197364880790834815L;
 @Id
 @GeneratedValue
 private int addmissionID;
-private long admissionDate;
+private long admissionDate= System.currentTimeMillis();
 @Temporal(TemporalType.DATE)
 private Date dischargeDate;
 @ManyToOne
 private Patient currentPatient;
 @OneToMany(mappedBy="hospitaladmission", cascade = ALL, fetch = EAGER, orphanRemoval = false)
 private List<MedicalService> MedicalService = new ArrayList<>();
-
-
-public HospitalAdmission(long admissionDate, Date dischargeDate,
-		List<org.app.service.entities.MedicalService> medicalService, Patient currentPatient) {
-	super();
-	
-	this.admissionDate = System.currentTimeMillis();
-	this.dischargeDate = dischargeDate;
-	MedicalService = medicalService;
-	this.currentPatient = currentPatient;
-}
 
 public int getAddmissionID() {
 	return addmissionID;

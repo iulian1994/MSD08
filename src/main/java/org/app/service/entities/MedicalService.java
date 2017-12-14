@@ -2,10 +2,18 @@ package org.app.service.entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
+import java.util.Set;
+import java.util.ArrayList;
+import java.util.Collection;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -22,6 +30,10 @@ private String Description;
 private Date deliveryDate;
 
 
+@ManyToMany(cascade = CascadeType.ALL)
+@JoinTable(name="EMP_SERV", joinColumns={@JoinColumn(name="eID")}, 
+inverseJoinColumns={@JoinColumn(name="medicalServiceId")})
+private List<Employee> employees = new ArrayList<>();
 
 @Override
 public int hashCode() {
@@ -64,17 +76,6 @@ public boolean equals(Object obj) {
 		return false;
 	return true;
 }
-
-
-
-public MedicalService(String description, Date deliveryDate,
-		HospitalAdmission hospitaladmission) {
-	super();
-	Description = description;
-	this.deliveryDate = deliveryDate;
-	this.hospitaladmission = hospitaladmission;
-}
-
 
 @ManyToOne
 private HospitalAdmission hospitaladmission;

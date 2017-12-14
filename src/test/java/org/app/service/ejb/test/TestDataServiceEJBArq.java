@@ -9,6 +9,7 @@ import org.app.service.ejb.DataService;
 import org.app.service.ejb.DataServiceEJB;
 import org.app.service.entities.EntityBase;
 import org.jboss.arquillian.container.test.api.Deployment;
+import org.jboss.arquillian.container.test.api.TargetsContainer;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.Archive;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
@@ -23,7 +24,6 @@ import static org.junit.Assert.*;
 @RunWith(Arquillian.class)
 public class TestDataServiceEJBArq {
 	private static Logger logger = Logger.getLogger(TestDataServiceEJBArq.class.getName());
-	
 	// Arquilian infrastructure
 	@EJB
 	private static DataService service;
