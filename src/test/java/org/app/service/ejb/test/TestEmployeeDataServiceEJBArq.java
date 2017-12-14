@@ -69,7 +69,7 @@ public class TestEmployeeDataServiceEJBArq {
 		
 		Integer employeesToAdd = 3;
 		for (int i=1; i <= employeesToAdd; i++){
-			service.add(new Employee(i, "employee_" + (100 + i)));
+			service.add(new Employee(i, "employeeMArius_" + (100 + i)));
 		}
 		Collection<Employee> employees = service.toCollection();
 		assertTrue("Fail to add Projects!", employees.size() == employeesToAdd);
