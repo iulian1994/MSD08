@@ -17,7 +17,7 @@ public class Employee implements Serializable {
 private Integer eID;
 private String name;
 private String surname;
-private String position;
+private String position; // eq indicative
 @ManyToMany(mappedBy = "employees")
 private List<MedicalService> medicalservice = new ArrayList<>();
 @OneToMany(mappedBy="responsible")

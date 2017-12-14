@@ -14,7 +14,7 @@ public class Task {
 
 @Id
 @GeneratedValue
-private int taskID;
+private Integer taskID;
 private String taskDescription;
 private String taskType;
 @Temporal(TemporalType.DATE)
@@ -22,11 +22,25 @@ private Date dueDate;
 @ManyToOne
 private Employee responsible;
 
-public int getTaskID() {
+
+public Task(Integer taskID, String taskDescription) {
+	super();
+	this.taskID = taskID;
+	this.taskDescription = taskDescription;
+}
+
+
+public Task() {
+	super();
+}
+
+
+public Integer getTaskID() {
 	return taskID;
 }
 
-public void setTaskID(int taskID) {
+
+public void setTaskID(Integer taskID) {
 	this.taskID = taskID;
 }
 
