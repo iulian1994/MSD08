@@ -19,6 +19,7 @@ import org.app.service.entities.Diagnostic;
 public interface DiagnosticDataService{
 	// CREATE or UPDATE
 	Diagnostic addDiagnostic(Diagnostic dianosticToAdd);
+	Diagnostic CreateDiagnostic(int a, String b);
 
 	// DELETE
 	String removeDiagnostic(Diagnostic diagnosticToDischage);
@@ -26,6 +27,10 @@ public interface DiagnosticDataService{
 	// READ
 	Diagnostic getDiagnosticByID(int diagnosticID);
 	Collection<Diagnostic> getDiagnostics();
+<<<<<<< HEAD
+=======
+	
+>>>>>>> branch 'master' of https://github.com/iulian1994/MSD08
 	
 	// Custom READ: custom query
 	Collection<Diagnostic> getDiagnosticsByDescription(String description);

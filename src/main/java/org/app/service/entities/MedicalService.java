@@ -35,6 +35,16 @@ private Date deliveryDate;
 inverseJoinColumns={@JoinColumn(name="medicalServiceId")})
 private List<Employee> employees = new ArrayList<>();
 
+public MedicalService() {
+	super();
+}
+
+public MedicalService(int medicalServiceId, String description) {
+	super();
+	this.medicalServiceId = medicalServiceId;
+	Description = description;
+}
+
 @Override
 public int hashCode() {
 	final int prime = 31;

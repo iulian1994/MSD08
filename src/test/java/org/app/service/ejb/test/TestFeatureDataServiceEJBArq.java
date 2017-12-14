@@ -1,4 +1,5 @@
 package org.app.service.ejb.test;
+
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
@@ -53,27 +54,6 @@ public class TestFeatureDataServiceEJBArq {
 	}
 
 	@Test
-	public void test3_AddFeature() {
-		logger.info("DEBUG: Junit TESTING: testAddFeature ...");
-		
-		Integer featuresToAdd = 3;
-		for (int i=1; i <= featuresToAdd; i++){
-			//service.addFeature(new Feature(100 + i, "Feature_" + (100 + i)));
-			service.addFeature(new Feature(23 + i, "Feature_" + (100 + i)));
-		}
-		Collection<Feature> features = service.getFeatures();
-		assertTrue("Fail to add features!", features.size() == featuresToAdd);
-	}
-
-	@Test
-	public void test4_GetFeatures() {
-		logger.info("DEBUG: Junit TESTING: testGetFeatures ...");
-		
-		Collection<Feature> features = service.getFeatures();
-		assertTrue("Fail to read features!!!!!", features.size() > 0);
-	}
-	
-	@Test
 	public void test2_DeleteFeature() {
 		logger.info("DEBUG: Junit TESTING: testDeleteFeature ...");
 		
@@ -83,5 +63,27 @@ public class TestFeatureDataServiceEJBArq {
 		Collection<Feature> featuresAfterDelete = service.getFeatures();
 		assertTrue("Fail to read features!", featuresAfterDelete.size() == 0);
 	}	
+
+	@Test
+	public void test3_AddFeature() {
+		logger.info("DEBUG: Junit TESTING: testAddFeature ...");
+		
+		Integer featuresToAdd = 3;
+		for (int i=1; i <= featuresToAdd; i++){
+			//service.addFeature(new Feature(100 + i, "Feature_" + (100 + i)));
+			service.addFeature(new Feature(null, "Feature_" + (100 + i)));
+		}
+		Collection<Feature> features = service.getFeatures();
+		assertTrue("Fail to add features!", features.size() == featuresToAdd);
+	}
+	
+	@Test
+	public void test4_GetFeatures() {
+		logger.info("DEBUG: Junit TESTING: testGetFeatures ...");
+		
+		Collection<Feature> features = service.getFeatures();
+		assertTrue("Fail to read features!", features.size() > 0);
+	}
+
 }
 /* http://localhost:8080/SCRUM-S2/data/features */

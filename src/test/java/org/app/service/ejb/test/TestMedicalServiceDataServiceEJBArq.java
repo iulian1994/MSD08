@@ -2,19 +2,16 @@ package org.app.service.ejb.test;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
-
 import java.util.Collection;
 import java.util.logging.Logger;
-
 import javax.ejb.EJB;
-
 import org.app.patterns.EntityRepository;
 import org.app.patterns.EntityRepositoryBase;
-import org.app.service.ejb.EmployeeDataService;
-import org.app.service.ejb.EmployeeDataServiceEJB;
+import org.app.service.ejb.MedicalServiceDataService;
+import org.app.service.ejb.MedicalServiceDataServiceEJB;
 import org.app.service.ejb.ProjectDataService;
 import org.app.service.ejb.ProjectDataServiceEJB;
-import org.app.service.entities.Employee;
+import org.app.service.entities.MedicalService;
 import org.app.service.entities.Project;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
@@ -29,19 +26,19 @@ import org.junit.runners.MethodSorters;
 
 @RunWith(Arquillian.class) 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class TestEmployeeDataServiceEJBArq {
-	private static Logger logger = Logger.getLogger(TestEmployeeDataServiceEJBArq.class.getName());
+public class TestMedicalServiceDataServiceEJBArq {
+	private static Logger logger = Logger.getLogger(TestMedicalServiceDataServiceEJBArq.class.getName());
 	
 	@EJB
-	private static EmployeeDataService service;
+	private static MedicalServiceDataService service;
 	
 	@Deployment // Arquilian infrastructure
 	public static Archive<?> createDeployment() {
 	        return ShrinkWrap
 	                .create(WebArchive.class, "msd-test.war")
-	                .addPackage(Employee.class.getPackage())
-	                .addClass(EmployeeDataService.class)
-	                .addClass(EmployeeDataServiceEJB.class)
+	                .addPackage(Project.class.getPackage())
+	                .addClass(MedicalServiceDataService.class)
+	                .addClass(MedicalServiceDataServiceEJB.class)
 	                .addClass(EntityRepository.class)
 	                .addClass(EntityRepositoryBase.class)
 	                .addAsResource("META-INF/persistence.xml")
@@ -57,32 +54,32 @@ public class TestEmployeeDataServiceEJBArq {
 	}
 
 	@Test
-	public void test4_GetProjects() {
-		logger.info("DEBUG: Junit TESTING: testGetProjects ...");
-		Collection<Employee> employees = service.toCollection();
-		assertTrue("Fail to read Employees!", employees.size() > 0);
+	public void test4_GetMedicalService() {
+		logger.info("DEBUG: Junit TESTING: testGetMedicalService =========>>>> ...");
+		Collection<MedicalService> MedicalService = service.toCollection();
+		assertTrue("Fail to read MedService!", MedicalService.size() > 0);
 	}
 
 	@Test
-	public void test3_AddProject() {
-		logger.info("DEBUG: Junit TESTING: testAddEMPLOYEE ...");
+	public void test3_AddMedicalService() {
+		logger.info("DEBUG: Junit TESTING: testAddMedicalService ...");
 		
-		Integer employeesToAdd = 3;
-		for (int i=1; i <= employeesToAdd; i++){
-			service.add(new Employee(i, "employeeMArius_" + (100 + i)));
+		Integer medservToAdd = 3;
+		for (int i=1; i <= medservToAdd; i++){
+			service.add(new MedicalService(i, "MedicalServ_nr_" + (100 + i)));
 		}
-		Collection<Employee> employees = service.toCollection();
-		assertTrue("Fail to add Projects!", employees.size() == employeesToAdd);
+		Collection<MedicalService> medservices = service.toCollection();
+		assertTrue("Fail to add MedicalServices!", medservices.size() == medservToAdd);
 	}
 
 	@Test
-	public void test2_DeleteProject() {
-		logger.info("DEBUG: Junit TESTING: testDeleteemp ...");
+	public void test2_DeleteMedicalService() {
+		logger.info("DEBUG: Junit TESTING: testDeleteMedicalServ ...");
 		
-		Collection<Employee> employees = service.toCollection();
-		for (Employee p: employees)
-			service.remove(p);
-		Collection<Employee> EMPAfterDelete = service.toCollection();
-		assertTrue("Fail to read Projects!", EMPAfterDelete.size() == 0);
+		Collection<MedicalService> medservices = service.toCollection();
+		for (MedicalService m: medservices)
+			service.remove(m);
+		Collection<MedicalService> MedAfterDelete = service.toCollection();
+		assertTrue("Fail to read MedicalService!", MedAfterDelete.size() == 0);
 	}	
 }

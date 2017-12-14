@@ -15,7 +15,6 @@ import javax.ws.rs.core.MediaType;
 import org.app.patterns.EntityRepository;
 import org.app.service.entities.EntityBase;
 import org.app.service.entities.Feature;
-import org.app.service.entities.Patient;
 
 // Implement simple CRUD Operations
 @Remote
@@ -35,5 +34,5 @@ public interface FeatureDataService{
 	
 	// Others
 	String getMessage();
-
 }
+
