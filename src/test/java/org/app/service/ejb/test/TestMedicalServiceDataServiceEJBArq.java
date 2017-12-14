@@ -9,10 +9,8 @@ import org.app.patterns.EntityRepository;
 import org.app.patterns.EntityRepositoryBase;
 import org.app.service.ejb.MedicalServiceDataService;
 import org.app.service.ejb.MedicalServiceDataServiceEJB;
-import org.app.service.ejb.ProjectDataService;
-import org.app.service.ejb.ProjectDataServiceEJB;
+import org.app.service.entities.Employee;
 import org.app.service.entities.MedicalService;
-import org.app.service.entities.Project;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.Archive;
@@ -36,7 +34,7 @@ public class TestMedicalServiceDataServiceEJBArq {
 	public static Archive<?> createDeployment() {
 	        return ShrinkWrap
 	                .create(WebArchive.class, "msd-test.war")
-	                .addPackage(Project.class.getPackage())
+	                .addPackage(Employee.class.getPackage())
 	                .addClass(MedicalServiceDataService.class)
 	                .addClass(MedicalServiceDataServiceEJB.class)
 	                .addClass(EntityRepository.class)

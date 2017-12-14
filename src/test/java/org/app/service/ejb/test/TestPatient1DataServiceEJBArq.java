@@ -9,10 +9,9 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import javax.ejb.EJB;
-
-import org.app.service.ejb.FeatureDataService;
-import org.app.service.ejb.FeatureDataServiceEJB;
-import org.app.service.entities.Feature;
+import org.app.service.ejb.Patient1DataService;
+import org.app.service.ejb.Patient1DataServiceEJB;
+import org.app.service.entities.Patient;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.Archive;
@@ -26,20 +25,20 @@ import org.junit.runners.MethodSorters;
 
 @RunWith(Arquillian.class) 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class TestFeatureDataServiceEJBArq {
+public class TestPatient1DataServiceEJBArq {
 	private static Logger logger = 
-			Logger.getLogger(TestFeatureDataServiceEJBArq.class.getName());
+			Logger.getLogger(TestPatient1DataServiceEJBArq.class.getName());
 	
 	@EJB // EJB DataService Ref
-	private static FeatureDataService service;
+	private static Patient1DataService service;
 	
 	@Deployment // Arquilian infrastructure
 	public static Archive<?> createDeployment() {
 	        return ShrinkWrap
 	                .create(WebArchive.class, "msd-test.war")
-	                .addPackage(Feature.class.getPackage())
-	                .addClass(FeatureDataService.class)
-	                .addClass(FeatureDataServiceEJB.class)
+	                .addPackage(Patient.class.getPackage())
+	                .addClass(Patient1DataService.class)
+	                .addClass(Patient1DataServiceEJB.class)
 	                .addAsResource("META-INF/persistence.xml")
 	                .addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
 	}
@@ -54,35 +53,34 @@ public class TestFeatureDataServiceEJBArq {
 	}
 
 	@Test
-	public void test2_DeleteFeature() {
+	public void test2_DeletePatient() {
 		logger.info("DEBUG: Junit TESTING: testDeleteFeature ...");
 		
-		Collection<Feature> features = service.getFeatures();
-		for (Feature f: features)
-			service.removeFeature(f);
-		Collection<Feature> featuresAfterDelete = service.getFeatures();
-		assertTrue("Fail to read features!", featuresAfterDelete.size() == 0);
+		Collection<Patient> patients = service.getPatients();
+		for (Patient f: patients)
+			service.removePatient(f);
+		Collection<Patient> patientsAfterDelete = service.getPatients();
+		assertTrue("Fail to read features!", patientsAfterDelete.size() == 0);
 	}	
 
 	@Test
 	public void test3_AddFeature() {
 		logger.info("DEBUG: Junit TESTING: testAddFeature ...");
 		
-		Integer featuresToAdd = 3;
-		for (int i=1; i <= featuresToAdd; i++){
-			//service.addFeature(new Feature(100 + i, "Feature_" + (100 + i)));
-			service.addFeature(new Feature(null, "Feature_" + (100 + i)));
+		Integer patientsToAdd = 9;
+		for (int i=1; i <= patientsToAdd; i++){
+			service.addPatient(new Patient(1141 + i, "Feature-curs_" + (100 + i)));
 		}
-		Collection<Feature> features = service.getFeatures();
-		assertTrue("Fail to add features!", features.size() == featuresToAdd);
+		Collection<Patient> patients = service.getPatients();
+		assertTrue("Fail to add features!", patients.size() == patientsToAdd);
 	}
 	
 	@Test
 	public void test4_GetFeatures() {
 		logger.info("DEBUG: Junit TESTING: testGetFeatures ...");
 		
-		Collection<Feature> features = service.getFeatures();
-		assertTrue("Fail to read features!", features.size() > 0);
+		Collection<Patient> patients = service.getPatients();
+		assertTrue("Fail to read features!", patients.size() > 0);
 	}
 
 }

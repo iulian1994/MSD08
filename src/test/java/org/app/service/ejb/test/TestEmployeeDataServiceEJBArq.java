@@ -12,10 +12,7 @@ import org.app.patterns.EntityRepository;
 import org.app.patterns.EntityRepositoryBase;
 import org.app.service.ejb.EmployeeDataService;
 import org.app.service.ejb.EmployeeDataServiceEJB;
-import org.app.service.ejb.ProjectDataService;
-import org.app.service.ejb.ProjectDataServiceEJB;
 import org.app.service.entities.Employee;
-import org.app.service.entities.Project;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.Archive;
@@ -57,14 +54,14 @@ public class TestEmployeeDataServiceEJBArq {
 	}
 
 	@Test
-	public void test4_GetProjects() {
+	public void test4_GetEmployees() {
 		logger.info("DEBUG: Junit TESTING: testGetProjects ...");
 		Collection<Employee> employees = service.toCollection();
 		assertTrue("Fail to read Employees!", employees.size() > 0);
 	}
 
 	@Test
-	public void test3_AddProject() {
+	public void test3_AddEmployees() {
 		logger.info("DEBUG: Junit TESTING: testAddEMPLOYEE ...");
 		
 		Integer employeesToAdd = 3;
@@ -76,7 +73,7 @@ public class TestEmployeeDataServiceEJBArq {
 	}
 
 	@Test
-	public void test2_DeleteProject() {
+	public void test2_DeleteEmployees() {
 		logger.info("DEBUG: Junit TESTING: testDeleteemp ...");
 		
 		Collection<Employee> employees = service.toCollection();

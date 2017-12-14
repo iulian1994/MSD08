@@ -13,7 +13,6 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import org.app.service.entities.Diagnostic;
-import org.app.service.entities.Patient;
 
 @Stateless @LocalBean
 public class DiagnosticDataServiceEJB implements DiagnosticDataService {
@@ -60,16 +59,10 @@ public class DiagnosticDataServiceEJB implements DiagnosticDataService {
 
 	@Override
 	public Collection<Diagnostic> getDiagnostics() {
-<<<<<<< HEAD
+
 		List<Diagnostic> Diagnostic = em.createQuery("SELECT d FROM Diagnostic d", Diagnostic.class)
 				.getResultList();
 		return Diagnostic;
-=======
-		
-			List<Diagnostic> diagnostics = em.createQuery("SELECT d FROM Diagnostic d", Diagnostic.class)
-					.getResultList();
-			return diagnostics;
->>>>>>> branch 'master' of https://github.com/iulian1994/MSD08
 	}
 
 	@Override

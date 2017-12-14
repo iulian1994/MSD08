@@ -1,19 +1,17 @@
 package org.app.service.ejb.test;
+
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.logging.Logger;
 
 import javax.ejb.EJB;
 
-import org.app.service.ejb.FeatureDataService;
-import org.app.service.ejb.FeatureDataServiceEJB;
+import org.app.patterns.EntityRepository;
+import org.app.patterns.EntityRepositoryBase;
 import org.app.service.ejb.PatientDataService;
 import org.app.service.ejb.PatientDataServiceEJB;
-import org.app.service.entities.Feature;
 import org.app.service.entities.Patient;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
@@ -29,10 +27,9 @@ import org.junit.runners.MethodSorters;
 @RunWith(Arquillian.class) 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class TestPatientDataServiceEJBArq {
-	private static Logger logger = 
-			Logger.getLogger(TestPatientDataServiceEJBArq.class.getName());
+	private static Logger logger = Logger.getLogger(TestPatientDataServiceEJBArq.class.getName());
 	
-	@EJB // EJB DataService Ref
+	@EJB
 	private static PatientDataService service;
 	
 	@Deployment // Arquilian infrastructure
@@ -42,49 +39,47 @@ public class TestPatientDataServiceEJBArq {
 	                .addPackage(Patient.class.getPackage())
 	                .addClass(PatientDataService.class)
 	                .addClass(PatientDataServiceEJB.class)
+	                .addClass(EntityRepository.class)
+	                .addClass(EntityRepositoryBase.class)
 	                .addAsResource("META-INF/persistence.xml")
 	                .addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
-	}
-	
+	}	
 	
 	@Test
 	public void test1_GetMessage() {
-		logger.info("DEBUG: Junit TESTING: getMessage ...");
+		logger.info("DEBUG: Junit TESTING: testGetMessage ...");
 		String response = service.getMessage();
 		assertNotNull("Data Service failed!", response);
 		logger.info("DEBUG: EJB Response ..." + response);
 	}
-	
+
 	@Test
 	public void test4_GetPatients() {
-		logger.info("DEBUG: Junit TESTING: testGetPATIENTS ...");
-		
-		Collection<Patient> patients = service.getPatients();
-		assertTrue("Fail to read PATIENTS!!!!! dmzzz", patients.size() > 0);
+		logger.info("DEBUG: Junit TESTING: testGetProjects ...");
+		Collection<Patient> Patients = service.toCollection();
+		assertTrue("Fail to read Patients!", Patients.size() > 0);
 	}
-	
+
 	@Test
-	public void test3_AddPatients() {
-		logger.info("DEBUG: Junit TESTING: testAddPATIENT ...");
+	public void test3_AddPatient() {
+		logger.info("DEBUG: Junit TESTING: testAddProject ...");
 		
 		Integer patientsToAdd = 3;
-		for (int i=1111; i <= patientsToAdd; i++){
-			//service.addFeature(new Feature(100 + i, "Feature_" + (100 + i)));
-			service.addPatient(new Patient(1001 + i, "Patient_" + (1010 + i)));
-			service.addPatient(new Patient(i,"marius"));
+		for (int i=1; i <= patientsToAdd; i++){
+			service.add(new Patient(i, "Project_" + (100 + i)));
 		}
-		Collection<Patient> patients = service.getPatients();
-		assertTrue("Fail to add patients!!! dmzzz  nr=" + patients.size(), patients.size() == patientsToAdd);
+		Collection<Patient> projects = service.toCollection();
+		assertTrue("Fail to add Projects!", projects.size() == patientsToAdd);
 	}
-	
+
 	@Test
-	public void test2_DeletePatients() {
-		logger.info("DEBUG: Junit TESTING: testDeletePatients ...");
+	public void test2_DeletePatientt() {
+		logger.info("DEBUG: Junit TESTING: testDeleteProject ...");
 		
-		Collection<Patient> patients = service.getPatients();
+		Collection<Patient> patients = service.toCollection();
 		for (Patient p: patients)
-			service.dischargePatient(p);
-		Collection<Patient> patientsAfterDischarge = service.getPatients();
-		assertTrue("Fail to read patients!", patientsAfterDischarge.size() == 0);
+			service.remove(p);
+		Collection<Patient> ProjectsAfterDelete = service.toCollection();
+		assertTrue("Fail to read Projects!", ProjectsAfterDelete.size() == 0);
 	}	
 }

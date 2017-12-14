@@ -5,12 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
-import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
-import javax.ejb.TransactionAttribute;
-import javax.ejb.TransactionAttributeType;
-import javax.inject.Inject;
 import org.app.patterns.EntityRepository;
 import org.app.patterns.EntityRepositoryBase;
 import org.app.service.entities.Employee;
@@ -32,7 +28,7 @@ public class EmployeeTaskDataServiceEJB extends EntityRepositoryBase<Employee>
 	
 	
 	public Employee createNewEmployee(Integer id){
-		// create project aggregate
+		
 		Employee employee = new Employee(id, "NEW employee" + "." + id);
 		List<Task> taskEmployee = new ArrayList<>();
 
@@ -41,9 +37,9 @@ public class EmployeeTaskDataServiceEJB extends EntityRepositoryBase<Employee>
 			taskEmployee.add(new Task(i, "R: " + employee.geteID() + "." + i));
 		}
 		employee.setTasks(taskEmployee); 		
-		// save project aggregate
+		
 		this.add(employee);
-		// return project aggregate to service client
+		
 		return employee;
 	}
 	
@@ -52,6 +48,6 @@ public class EmployeeTaskDataServiceEJB extends EntityRepositoryBase<Employee>
 	}
 
 	public String getMessage() {
-		return "ProjectSprint DataService is working...";
+		return "ETDataService is working...";
 	}
 }

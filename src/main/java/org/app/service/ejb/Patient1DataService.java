@@ -11,27 +11,22 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-
 import org.app.patterns.EntityRepository;
 import org.app.service.entities.EntityBase;
-import org.app.service.entities.Feature;
+import org.app.service.entities.Patient;
 
 // Implement simple CRUD Operations
 @Remote
-public interface FeatureDataService{
+public interface Patient1DataService{
 	// CREATE or UPDATE
-	Feature addFeature(Feature featureToAdd);
+	Patient addPatient(Patient patientToAdd);
 
 	// DELETE
-	String removeFeature(Feature featureToDelete);
+	String removePatient(Patient patientToDelete);
 
 	// READ
-	Feature getFeatureByID(Integer featureID);
-	Collection<Feature> getFeatures();
-	
-	// Custom READ: custom query
-	Feature getFeatureByName(String featureName);
-	
+	Collection<Patient> getPatients();
+
 	// Others
 	String getMessage();
 }

@@ -3,7 +3,6 @@ package org.app.service.ejb;
 import javax.ejb.Remote;
 import org.app.patterns.EntityRepository;
 import org.app.service.entities.Employee;
-import org.app.service.entities.Release;
 import org.app.service.entities.Task;
 
 @Remote

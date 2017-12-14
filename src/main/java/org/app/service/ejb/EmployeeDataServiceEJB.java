@@ -14,8 +14,7 @@ import javax.inject.Inject;
 import org.app.patterns.EntityRepository;
 import org.app.patterns.EntityRepositoryBase;
 import org.app.service.entities.Employee;
-import org.app.service.entities.Project;
-import org.app.service.entities.Release;
+
 
 @Stateless @LocalBean
 public class EmployeeDataServiceEJB 

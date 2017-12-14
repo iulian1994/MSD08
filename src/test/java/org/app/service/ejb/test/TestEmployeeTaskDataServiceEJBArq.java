@@ -8,18 +8,12 @@ import java.util.List;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
 import org.app.patterns.EntityRepository;
+import org.app.service.ejb.EmployeeDataService;
+import org.app.service.ejb.EmployeeDataServiceEJB;
 import org.app.service.ejb.EmployeeTaskDataService;
-import org.app.service.ejb.FeatureDataService;
-import org.app.service.ejb.FeatureDataServiceEJB;
-import org.app.service.ejb.ProjectFactory;
-import org.app.service.ejb.ProjectReleaseFeatureDataService;
-import org.app.service.ejb.ProjectReleaseFeatureDataServiceEJB;
-import org.app.service.ejb.SprintDataService;
-import org.app.service.ejb.SprintDataServiceEJB;
+import org.app.service.ejb.EmployeeTaskDataServiceEJB;
 import org.app.service.ejb.ValidatorInterceptor;
 import org.app.service.entities.Employee;
-import org.app.service.entities.Project;
-import org.app.service.entities.Release;
 import org.app.service.entities.Task;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
@@ -32,21 +26,20 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
 
-/*
- * JUnit test for EJB: TestProjectReleaseFeatureDataServiceEJBArq
- */
+
+
 @RunWith(Arquillian.class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class TestEmployeeTaskDataServiceEJBArq {
-	private static Logger logger = Logger.getLogger(TestProjectReleaseFeatureDataServiceEJBArq.class.getName());
-	// Arquilian infrastructure
+	private static Logger logger = Logger.getLogger(TestEmployeeTaskDataServiceEJBArq.class.getName());
+	
 	@Deployment
     public static Archive<?> createDeployment() {
         return ShrinkWrap
                 .create(WebArchive.class, "msd-test.war")
-                .addPackage(EntityRepository.class.getPackage()).addPackage(Project.class.getPackage())
-                .addClass(FeatureDataService.class).addClass(FeatureDataServiceEJB.class)
-                .addClass(ProjectReleaseFeatureDataService.class).addClass(ProjectReleaseFeatureDataServiceEJB.class)
+                .addPackage(EntityRepository.class.getPackage()).addPackage(Employee.class.getPackage())
+                .addClass(EmployeeDataService.class).addClass(EmployeeDataServiceEJB.class)
+                .addClass(EmployeeTaskDataService.class).addClass(EmployeeTaskDataServiceEJB.class)
                 .addAsResource("META-INF/persistence.xml")
                 .addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
     }

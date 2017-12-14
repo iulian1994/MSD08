@@ -12,7 +12,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import org.app.patterns.EntityRepository;
 import org.app.service.entities.EntityBase;
-import org.app.service.entities.Feature;
 import org.app.service.entities.Diagnostic;
 
 @Remote
@@ -27,11 +26,7 @@ public interface DiagnosticDataService{
 	// READ
 	Diagnostic getDiagnosticByID(int diagnosticID);
 	Collection<Diagnostic> getDiagnostics();
-<<<<<<< HEAD
-=======
-	
->>>>>>> branch 'master' of https://github.com/iulian1994/MSD08
-	
+
 	// Custom READ: custom query
 	Collection<Diagnostic> getDiagnosticsByDescription(String description);
 	
