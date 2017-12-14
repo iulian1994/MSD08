@@ -25,10 +25,10 @@ public interface DiagnosticDataService{
 
 	// READ
 	Diagnostic getDiagnosticByID(int diagnosticID);
-	Collection<Diagnostic> getPatients();
+	Collection<Diagnostic> getDiagnostics();
 	
 	// Custom READ: custom query
-	Diagnostic getDiagnosticByName(String diagnosticName);
+	Collection<Diagnostic> getDiagnosticsByDescription(String description);
 	
 	// Others
 	String getMessage();

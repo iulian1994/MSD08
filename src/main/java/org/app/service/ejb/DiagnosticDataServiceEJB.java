@@ -1,6 +1,7 @@
 package org.app.service.ejb;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.logging.Logger;
 
 import javax.annotation.PostConstruct;
@@ -8,6 +9,7 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import org.app.service.entities.Diagnostic;
 import org.app.service.entities.Patient;
@@ -56,15 +58,19 @@ public class DiagnosticDataServiceEJB implements DiagnosticDataService {
 	}
 
 	@Override
-	public Collection<Diagnostic> getPatients() {
-		// TODO Auto-generated method stub
-		return null;
+	public Collection<Diagnostic> getDiagnostics() {
+		List<Diagnostic> Diagnostic = em.createQuery("SELECT d FROM Diagnostic d", Diagnostic.class)
+				.getResultList();
+		return Diagnostic;
 	}
 
 	@Override
-	public Diagnostic getDiagnosticByName(String diagnosticName) {
-		// TODO Auto-generated method stub
-		return null;
+	public Collection<Diagnostic> getDiagnosticsByDescription(String description)
+	{
+		Query query = em.createQuery("SELECT d FROM Diagnostic d where d.Description LIKE :searchString", Diagnostic.class);
+		query.setParameter("searchString","%" + description + "%");
+		List<Diagnostic> Diagnostic = query.getResultList();
+		return Diagnostic;
 	}
 
 	@Override
