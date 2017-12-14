@@ -19,13 +19,15 @@ import org.app.service.entities.Diagnostic;
 public interface DiagnosticDataService{
 	// CREATE or UPDATE
 	Diagnostic addDiagnostic(Diagnostic dianosticToAdd);
+	Diagnostic CreateDiagnostic(int a, String b);
 
 	// DELETE
 	String removeDiagnostic(Diagnostic diagnosticToDischage);
 
 	// READ
 	Diagnostic getDiagnosticByID(int diagnosticID);
-	Collection<Diagnostic> getPatients();
+	Collection<Diagnostic> getDiagnostics();
+	
 	
 	// Custom READ: custom query
 	Diagnostic getDiagnosticByName(String diagnosticName);

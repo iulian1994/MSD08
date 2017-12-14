@@ -1,11 +1,13 @@
 package org.app.service.ejb;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.logging.Logger;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
+import javax.persistence.Query;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -15,7 +17,7 @@ import org.app.service.entities.Patient;
 @Stateless @LocalBean
 public class DiagnosticDataServiceEJB implements DiagnosticDataService {
 
-	private static Logger logger = Logger.getLogger(PatientDataServiceEJB.class.getName());
+	private static Logger logger = Logger.getLogger(DiagnosticDataServiceEJB.class.getName());
 	
 	/* DataService initialization */
 	// Inject resource 
@@ -56,9 +58,11 @@ public class DiagnosticDataServiceEJB implements DiagnosticDataService {
 	}
 
 	@Override
-	public Collection<Diagnostic> getPatients() {
-		// TODO Auto-generated method stub
-		return null;
+	public Collection<Diagnostic> getDiagnostics() {
+		
+			List<Diagnostic> diagnostics = em.createQuery("SELECT d FROM Diagnostic d", Diagnostic.class)
+					.getResultList();
+			return diagnostics;
 	}
 
 	@Override
@@ -70,6 +74,16 @@ public class DiagnosticDataServiceEJB implements DiagnosticDataService {
 	@Override
 	public String getMessage() {
 		return "DiagnosticDataServiceEJB functioneaza!!!!!!... ";
+	}
+	
+
+	@Override
+	public Diagnostic CreateDiagnostic(int a, String b) {
+		Diagnostic diag = new Diagnostic(a, b);
+	    diag.setDiagnosticId(a);
+	    diag.setComments(b);
+	    em.persist(diag);
+	    return null;
 	}
 
 }
