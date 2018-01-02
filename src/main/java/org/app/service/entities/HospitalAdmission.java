@@ -26,7 +26,6 @@ public class HospitalAdmission implements Serializable {
 private static final long serialVersionUID = -9197364880790834815L;
 
 @Id
-@GeneratedValue
 private int addmissionID;
 private long admissionDate= System.currentTimeMillis();
 @Temporal(TemporalType.DATE)

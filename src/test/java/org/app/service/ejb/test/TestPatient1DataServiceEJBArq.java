@@ -54,7 +54,7 @@ public class TestPatient1DataServiceEJBArq {
 
 	@Test
 	public void test2_DeletePatient() {
-		logger.info("DEBUG: Junit TESTING: testDeleteFeature ...");
+		logger.info("DEBUG: Junit TESTING: testDeletePatient ...");
 		
 		Collection<Patient> patients = service.getPatients();
 		for (Patient f: patients)
@@ -64,8 +64,8 @@ public class TestPatient1DataServiceEJBArq {
 	}	
 
 	@Test
-	public void test3_AddFeature() {
-		logger.info("DEBUG: Junit TESTING: testAddFeature ...");
+	public void test3_AddPatient() {
+		logger.info("DEBUG: Junit TESTING: testAddPatient ...");
 		
 		Integer patientsToAdd = 9;
 		for (int i=1; i <= patientsToAdd; i++){

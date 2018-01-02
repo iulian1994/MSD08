@@ -55,31 +55,31 @@ public class TestPatientDataServiceEJBArq {
 
 	@Test
 	public void test4_GetPatients() {
-		logger.info("DEBUG: Junit TESTING: testGetProjects ...");
+		logger.info("DEBUG: Junit TESTING: testGetPatients ...");
 		Collection<Patient> Patients = service.toCollection();
 		assertTrue("Fail to read Patients!", Patients.size() > 0);
 	}
 
 	@Test
 	public void test3_AddPatient() {
-		logger.info("DEBUG: Junit TESTING: testAddProject ...");
+		logger.info("DEBUG: Junit TESTING: testAddPatient ...");
 		
 		Integer patientsToAdd = 3;
 		for (int i=1; i <= patientsToAdd; i++){
-			service.add(new Patient(i, "Project_" + (100 + i)));
+			service.add(new Patient(i, "Patient_" + (100 + i)));
 		}
 		Collection<Patient> projects = service.toCollection();
-		assertTrue("Fail to add Projects!", projects.size() == patientsToAdd);
+		assertTrue("Fail to add Patients!", projects.size() == patientsToAdd);
 	}
 
 	@Test
 	public void test2_DeletePatientt() {
-		logger.info("DEBUG: Junit TESTING: testDeleteProject ...");
+		logger.info("DEBUG: Junit TESTING: testDeletePatients ...");
 		
 		Collection<Patient> patients = service.toCollection();
 		for (Patient p: patients)
 			service.remove(p);
 		Collection<Patient> ProjectsAfterDelete = service.toCollection();
-		assertTrue("Fail to read Projects!", ProjectsAfterDelete.size() == 0);
+		assertTrue("Fail to read Patients!", ProjectsAfterDelete.size() == 0);
 	}	
 }

@@ -13,7 +13,6 @@ import javax.persistence.OneToMany;
 public class Employee implements Serializable {
 	private static final long serialVersionUID = -634971356189992075L;
 @Id
-@GeneratedValue
 private Integer eID;
 private String name;
 private String surname;

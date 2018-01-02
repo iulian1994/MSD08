@@ -33,7 +33,7 @@ import javax.ws.rs.core.Response;
 @RunWith(Arquillian.class)
 public class TestDataServiceRestArq {
 	private static Logger logger = Logger.getLogger(TestDataServiceRestArq.class.getName());
-	private static String serviceURL = "http://localhost:8080/msd-test/rest/service";
+	private static String serviceURL = "http://localhost:8080/arq-test/rest/service";
 	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -42,7 +42,7 @@ public class TestDataServiceRestArq {
 	@Deployment
 	public static Archive<?> createDeployment() {
 	        return ShrinkWrap
-	                .create(WebArchive.class, "msd-test.war")
+	                .create(WebArchive.class, "arq-test.war")
 	                .addPackage(EntityRepository.class.getPackage())
 	                .addPackage(DataService.class.getPackage())
 	                .addPackage(EntityBase.class.getPackage())
@@ -60,8 +60,7 @@ public class TestDataServiceRestArq {
         String value = response.readEntity(String.class);
         response.close(); 
         
-        System.out.println(">>>> >>>> REST Response >>>> >>>>> " + value);
+        System.out.println(">>>> >>>> REST Response===WORKING >>>> >>>>> " + value);
 	}
 
 }
-// https://github.com/wildfly/quickstart/tree/10.x/helloworld-rs

@@ -11,7 +11,6 @@ public class Diagnostic implements Serializable {
 private static final long serialVersionUID = 7745880111522579906L;
 
 	@Id
-	@GeneratedValue
 	private Integer diagnosticId;
 	private String Comments;
 	public Integer getDiagnosticId() {

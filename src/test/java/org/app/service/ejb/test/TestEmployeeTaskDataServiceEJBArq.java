@@ -46,7 +46,7 @@ public class TestEmployeeTaskDataServiceEJBArq {
 	@EJB // Test EJB Data Service Reference is injected
 	private static EmployeeTaskDataService service;	
 	// JUnit test methods
-	@Test
+//	@Test
 	public void test4_GetEmployee() {
 		logger.info("DEBUG: Junit TESTING: testGetEmployee 7002 ...");
 		Employee employee = service.getById(7002);
@@ -55,7 +55,7 @@ public class TestEmployeeTaskDataServiceEJBArq {
 	/* CREATE Test 2: create aggregate*/
 	@Test
 	public void test3_CreateNewEmployee(){
-		Employee employee = service.createNewEmployee(7002);
+		Employee employee = service.createNewEmployee(2);
 		assertNotNull("Fail to create new employee in repository!", employee);
 		// update project
 		employee.setName(employee.getName() + " - changed by test client");		
@@ -66,7 +66,7 @@ public class TestEmployeeTaskDataServiceEJBArq {
 		assertNotNull("Fail to save new employee in repository!", employee);
 		logger.info("DEBUG createNewEmployee: project changed: " + employee);
 		// check read
-		employee = service.getById(7002);  // !!!
+		employee = service.getById(employee.geteID());  // !!!
 		assertNotNull("Fail to find changed employee in repository!", employee);
 		logger.info("DEBUG createNewEmployee: queried project" + employee);
 	}		
@@ -74,13 +74,13 @@ public class TestEmployeeTaskDataServiceEJBArq {
 	@Test
 	public void test2_DeleteEmployee() {
 		logger.info("DEBUG: Junit TESTING: testDeleteEmployee 7002...");
-		Employee employee = service.getById(7002);  // !!!
+		Employee employee = service.getById(2);  // !!!
 		if (employee != null)
 			service.remove(employee);
 		employee = service.getById(7002);  // !!!
 		assertNull("Fail to delete Employee 7002!", employee);
 	}	
-	@Test
+//	@Test
 	public void test1_GetMessage() {
 		logger.info("DEBUG: Junit TESTING: testGetMessage ...");
 		String response = service.getMessage();
