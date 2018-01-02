@@ -27,7 +27,8 @@ private static final long serialVersionUID = -9197364880790834815L;
 
 @Id
 private int addmissionID;
-private long admissionDate= System.currentTimeMillis();
+@Temporal(TemporalType.DATE)
+private Date admissionDate;
 @Temporal(TemporalType.DATE)
 private Date dischargeDate;
 @ManyToOne
@@ -43,11 +44,11 @@ public void setAddmissionID(int addmissionID) {
 	this.addmissionID = addmissionID;
 }
 
-public long getAdmissionDate() {
+public Date getAdmissionDate() {
 	return admissionDate;
 }
 
-public void setAdmissionDate(long admissionDate) {
+public void setAdmissionDate(Date admissionDate) {
 	this.admissionDate = admissionDate;
 }
 

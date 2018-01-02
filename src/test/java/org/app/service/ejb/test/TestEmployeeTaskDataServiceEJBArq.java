@@ -46,10 +46,10 @@ public class TestEmployeeTaskDataServiceEJBArq {
 	@EJB // Test EJB Data Service Reference is injected
 	private static EmployeeTaskDataService service;	
 	// JUnit test methods
-//	@Test
+	@Test
 	public void test4_GetEmployee() {
 		logger.info("DEBUG: Junit TESTING: testGetEmployee 7002 ...");
-		Employee employee = service.getById(7002);
+		Employee employee = service.getById(1);
 		assertNotNull("Fail to Get Employee 7002!", employee);
 	}
 	/* CREATE Test 2: create aggregate*/
@@ -80,7 +80,7 @@ public class TestEmployeeTaskDataServiceEJBArq {
 		employee = service.getById(7002);  // !!!
 		assertNull("Fail to delete Employee 7002!", employee);
 	}	
-//	@Test
+	@Test
 	public void test1_GetMessage() {
 		logger.info("DEBUG: Junit TESTING: testGetMessage ...");
 		String response = service.getMessage();

@@ -60,7 +60,7 @@ public class TestPatient1DataServiceEJBArq {
 		for (Patient f: patients)
 			service.removePatient(f);
 		Collection<Patient> patientsAfterDelete = service.getPatients();
-		assertTrue("Fail to read features!", patientsAfterDelete.size() == 0);
+		assertTrue("Fail to read patients!", patientsAfterDelete.size() == 0);
 	}	
 
 	@Test
@@ -69,15 +69,15 @@ public class TestPatient1DataServiceEJBArq {
 		
 		Integer patientsToAdd = 9;
 		for (int i=1; i <= patientsToAdd; i++){
-			service.addPatient(new Patient(1141 + i, "Feature-curs_" + (100 + i)));
+			service.addPatient(new Patient(1141 + i, "Patient_" + (100 + i)));
 		}
 		Collection<Patient> patients = service.getPatients();
-		assertTrue("Fail to add features!", patients.size() == patientsToAdd);
+		assertTrue("Fail to add patients!", patients.size() == patientsToAdd);
 	}
 	
 	@Test
-	public void test4_GetFeatures() {
-		logger.info("DEBUG: Junit TESTING: testGetFeatures ...");
+	public void test4_GetPatients() {
+		logger.info("DEBUG: Junit TESTING: testGetPatients ...");
 		
 		Collection<Patient> patients = service.getPatients();
 		assertTrue("Fail to read features!", patients.size() > 0);
