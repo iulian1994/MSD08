@@ -15,6 +15,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 @XmlRootElement(name="task") 
 @XmlAccessorType(XmlAccessType.NONE)
@@ -69,15 +70,27 @@ public Date getDueDate() {
 public void setDueDate(Date dueDate) {
 	this.dueDate = dueDate;
 }
-@XmlElement
+@XmlTransient //sigur nu mere... LOOP
 public Employee getResponsible() {
 	return responsible;
 }
-@XmlElementWrapper(name = "employees") @XmlElement(name = "employee")
+
 public void setResponsible(Employee responsible) {
 	this.responsible = responsible;
 	}
 public Task() {
 	super();
 	}
+
+public static String BASE_URL = Employee.BASE_URL;
+@XmlElement(name = "link")
+public AtomLink getLink() throws Exception {
+	String restUrl = BASE_URL 
+			+ ((this.getResponsible() != null) ? this.getResponsible().getEmployeeID() : "")
+			+ "/tasks/" //figur aici a facut tura trecuta!
+			+ this.getTaskID();
+    return new AtomLink(restUrl, "get-tasks");
+}	
+public void setLink(AtomLink link){}
+
 }

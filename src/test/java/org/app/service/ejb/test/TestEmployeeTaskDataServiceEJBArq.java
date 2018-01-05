@@ -49,7 +49,7 @@ public class TestEmployeeTaskDataServiceEJBArq {
 	@Test
 	public void test4_GetEmployee() {
 		logger.info("DEBUG: Junit TESTING: testGetEmployee 7002 ...");
-		Employee employee = service.getById(1);
+		Employee employee = service.getById(2222);
 		assertNotNull("Fail to Get Employee 7002!", employee);
 	}
 	/* CREATE Test 2: create aggregate*/
@@ -74,10 +74,10 @@ public class TestEmployeeTaskDataServiceEJBArq {
 	@Test
 	public void test2_DeleteEmployee() {
 		logger.info("DEBUG: Junit TESTING: testDeleteEmployee 7002...");
-		Employee employee = service.getById(2);  // !!!
+		Employee employee = service.getById(2222);  // !!!
 		if (employee != null)
 			service.remove(employee);
-		employee = service.getById(7002);  // !!!
+		employee = service.getById(2222);  // !!!
 		assertNull("Fail to delete Employee 7002!", employee);
 	}	
 	@Test

@@ -85,7 +85,15 @@ public class HospitalAdmission implements Serializable {
 	public void setPatient(Patient patient) {
 		this.patient = patient;
 	}
-
 	
-	
+	public static String BASE_URL = Patient.BASE_URL;
+	@XmlElement(name = "link")
+    public AtomLink getLink() throws Exception {
+		String restUrl = BASE_URL 
+				+ ((this.getPatient() != null) ? this.getPatient().getPatientid() : "")
+				+ "/hospitaladmission/" 
+				+ this.getAddmissionNo();
+        return new AtomLink(restUrl, "get-admissions");
+    }	
+	public void setLink(AtomLink link){}
 }

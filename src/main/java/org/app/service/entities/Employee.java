@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import static javax.persistence.CascadeType.ALL;
+import static javax.persistence.FetchType.EAGER;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -33,8 +35,9 @@ private String position;
 @JoinTable(name="Employee_MEDSRV")
 private List<MedicalService> medicalservices = new ArrayList<>();
 
-@OneToMany(cascade = ALL, fetch=FetchType.EAGER, orphanRemoval=true)
+@OneToMany(mappedBy="responsible", cascade = ALL, fetch = EAGER, orphanRemoval = false)
 private List<Task> tasks = new ArrayList<>();
+
 
 public List<MedicalService> getMedicalservices() {
 	return medicalservices;
@@ -105,5 +108,12 @@ public Employee(Integer employeeID, String name) {
 public Employee() {
 	super();
 }
+public static String BASE_URL = "http://localhost:8080/MSD-S3/data/employees/";
+@XmlElement(name = "link")
+public AtomLink getLink() throws Exception {
+	String restUrl = BASE_URL + this.getEmployeeID();
+    return new AtomLink(restUrl, "get-employee");
+}	
 
+public void setLink(AtomLink link){}
 }

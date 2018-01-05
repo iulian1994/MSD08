@@ -115,7 +115,7 @@ implements Patient1DataService{
 	}
 	
 	// GET method on second repository for Release-type entities
-		@GET @Path("/{patientid}/ospitaladmission/{addmissionNo}")
+		@GET @Path("/{patientid}/hospitaladmission/{addmissionNo}")
 		@Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
 		@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
 		public HospitalAdmission getHospitalAdmissionById(@PathParam("addmissionNo") Integer admissionNo){

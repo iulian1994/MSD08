@@ -88,4 +88,15 @@ public class Patient implements Serializable{
 			return false;
 		return true;
 	}
+	
+	/* Rest Resource URL*/
+	public static String BASE_URL = "http://localhost:8080/MSD-S3/data/patients/";
+	@XmlElement(name = "link")
+    public AtomLink getLink() throws Exception {
+		String restUrl = BASE_URL + this.getPatientid();
+        return new AtomLink(restUrl, "get-patient");
+    }	
+	
+	public void setLink(AtomLink link){}
+	
 }
