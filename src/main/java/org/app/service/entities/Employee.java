@@ -3,41 +3,63 @@ import java.util.Collection;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import static javax.persistence.CascadeType.ALL;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlRootElement;
 
+@XmlRootElement(name="employee") 
+@XmlAccessorType(XmlAccessType.NONE)
 @Entity
 public class Employee implements Serializable {
-	private static final long serialVersionUID = -634971356189992075L;
+
 @Id
-private Integer eID;
+private Integer employeeID;
 private String name;
 private String surname;
-private String position; // eq indicative
-@ManyToMany(mappedBy = "employees")
-private List<MedicalService> medicalservice = new ArrayList<>();
-@OneToMany(mappedBy="responsible")
-protected Collection<Task> tasks;
+private String position; 
 
-public Collection<Task> getTasks() {
+@ManyToMany(cascade = { CascadeType.ALL })
+@JoinTable(name="Employee_MEDSRV")
+private List<MedicalService> medicalservices = new ArrayList<>();
+
+@OneToMany(cascade = ALL, fetch=FetchType.EAGER, orphanRemoval=true)
+private List<Task> tasks = new ArrayList<>();
+
+public List<MedicalService> getMedicalservices() {
+	return medicalservices;
+}
+
+public void setMedicalservices(List<MedicalService> medicalservices) {
+	this.medicalservices = medicalservices;
+}
+@XmlElementWrapper(name = "tasks") @XmlElement(name = "task")
+public List<Task> getTasks() {
 	return tasks;
 }
 
-public void setTasks(Collection<Task> tasks) {
+public void setTasks(List<Task> tasks) {
 	this.tasks = tasks;
 }
-
-public Integer geteID() {
-	return eID;
+@XmlElement
+public Integer getEmployeeID() {
+	return employeeID;
 }
 
-public void seteID(Integer eID) {
-	this.eID = eID;
+public void setEmployeeID(Integer employeeID) {
+	this.employeeID = employeeID;
 }
-
+@XmlElement
 public String getName() {
 	return name;
 }
@@ -45,7 +67,7 @@ public String getName() {
 public void setName(String name) {
 	this.name = name;
 }
-
+@XmlElement
 public String getSurname() {
 	return surname;
 }
@@ -53,7 +75,7 @@ public String getSurname() {
 public void setSurname(String surname) {
 	this.surname = surname;
 }
-
+@XmlElement
 public String getPosition() {
 	return position;
 }
@@ -62,22 +84,11 @@ public void setPosition(String position) {
 	this.position = position;
 }
 
-public List<MedicalService> getMedicalservice() {
-	return medicalservice;
-}
-
-public void setMedicalservice(List<MedicalService> medicalservice) {
-	this.medicalservice = medicalservice;
-	}
-
-
 
 @Override
 public int hashCode() {
 	final int prime = 31;
 	int result = 1;
-	result = prime * result + ((eID == null) ? 0 : eID.hashCode());
-	result = prime * result + ((medicalservice == null) ? 0 : medicalservice.hashCode());
 	result = prime * result + ((name == null) ? 0 : name.hashCode());
 	result = prime * result + ((position == null) ? 0 : position.hashCode());
 	result = prime * result + ((surname == null) ? 0 : surname.hashCode());
@@ -85,55 +96,14 @@ public int hashCode() {
 	return result;
 }
 
-@Override
-public boolean equals(Object obj) {
-	if (this == obj)
-		return true;
-	if (obj == null)
-		return false;
-	if (getClass() != obj.getClass())
-		return false;
-	Employee other = (Employee) obj;
-	if (eID == null) {
-		if (other.eID != null)
-			return false;
-	} else if (!eID.equals(other.eID))
-		return false;
-	if (medicalservice == null) {
-		if (other.medicalservice != null)
-			return false;
-	} else if (!medicalservice.equals(other.medicalservice))
-		return false;
-	if (name == null) {
-		if (other.name != null)
-			return false;
-	} else if (!name.equals(other.name))
-		return false;
-	if (position == null) {
-		if (other.position != null)
-			return false;
-	} else if (!position.equals(other.position))
-		return false;
-	if (surname == null) {
-		if (other.surname != null)
-			return false;
-	} else if (!surname.equals(other.surname))
-		return false;
-	if (tasks == null) {
-		if (other.tasks != null)
-			return false;
-	} else if (!tasks.equals(other.tasks))
-		return false;
-	return true;
-}
-
-public Employee(Integer eID, String name) {
+public Employee(Integer employeeID, String name) {
 	super();
-	this.eID = eID;
+	this.employeeID = employeeID;
 	this.name = name;
 }
 
 public Employee() {
 	super();
-	}
+}
+
 }

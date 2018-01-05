@@ -55,18 +55,18 @@ public class TestEmployeeTaskDataServiceEJBArq {
 	/* CREATE Test 2: create aggregate*/
 	@Test
 	public void test3_CreateNewEmployee(){
-		Employee employee = service.createNewEmployee(2);
+		Employee employee = service.createNewEmployee(2222);
 		assertNotNull("Fail to create new employee in repository!", employee);
 		// update project
 		employee.setName(employee.getName() + " - changed by test client");		
-		Collection<Task> tasks = employee.getTasks();
+		List<Task> tasks = employee.getTasks();/////////////////list nu collection
 		for(Task r: tasks)
 			r.setTaskDescription(r.getTaskDescription() + " - changed by test client");
 		employee = service.add(employee);
 		assertNotNull("Fail to save new employee in repository!", employee);
 		logger.info("DEBUG createNewEmployee: project changed: " + employee);
 		// check read
-		employee = service.getById(employee.geteID());  // !!!
+		employee = service.getById(employee.getEmployeeID());  // !!!
 		assertNotNull("Fail to find changed employee in repository!", employee);
 		logger.info("DEBUG createNewEmployee: queried project" + employee);
 	}		

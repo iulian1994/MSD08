@@ -13,6 +13,7 @@ private static final long serialVersionUID = 7745880111522579906L;
 	@Id
 	private Integer diagnosticId;
 	private String Comments;
+	
 	public Integer getDiagnosticId() {
 		return diagnosticId;
 	}

@@ -1,5 +1,4 @@
 package org.app.service.ejb;
-
 import java.util.logging.Logger;
 
 import javax.annotation.PostConstruct;
@@ -13,12 +12,7 @@ import org.app.patterns.EntityRepository;
 import org.app.patterns.EntityRepositoryBase;
 import org.app.service.entities.EntityBase;
 
-/**
- * Session Bean implementation class ScrumTeamRepositoryService
- * Aggregate Repository Service Facade: Project - features - releases
- */
 @Path("service")
-// 1. Remote interface
 @Stateless
 @LocalBean
 public class DataServiceEJB extends EntityRepositoryBase<EntityBase> implements DataService{

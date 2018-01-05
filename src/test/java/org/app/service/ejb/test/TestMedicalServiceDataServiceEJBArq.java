@@ -62,9 +62,10 @@ public class TestMedicalServiceDataServiceEJBArq {
 	public void test3_AddMedicalService() {
 		logger.info("DEBUG: Junit TESTING: testAddMedicalService ...");
 		
-		Integer medservToAdd = 3;
+		Integer medservToAdd = 23;
 		for (int i=1; i <= medservToAdd; i++){
-			service.add(new MedicalService(i, "MedicalServ_nr_" + (100 + i)));
+			//service.add(new MedicalService(i, "MedicalServ_nr_" + (100 + i)));
+			service.add(new MedicalService(i, "Allalala"));
 		}
 		Collection<MedicalService> medservices = service.toCollection();
 		assertTrue("Fail to add MedicalServices!", medservices.size() == medservToAdd);

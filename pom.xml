@@ -63,7 +63,14 @@
 			<version>4.12</version>
 			<scope>test</scope>
 		</dependency>
-
+		
+		<!-- https://mvnrepository.com/artifact/org.springframework.data/spring-data-jpa -->
+		<!-- https://mvnrepository.com/artifact/org.springframework.data/spring-data-jpa -->
+		<dependency>
+		    <groupId>org.springframework.data</groupId>
+		    <artifactId>spring-data-jpa</artifactId>
+		    <version>2.0.2.RELEASE</version>
+		</dependency>
 
 		<!-- Import Arquillian dependencies -->
 		<!-- https://mvnrepository.com/artifact/org.jboss.arquillian.core/arquillian-core-api -->
@@ -111,6 +118,14 @@
 					<artifactId>jconsole</artifactId>
 				</exclusion>
 			</exclusions>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.jboss.shrinkwrap.resolver/shrinkwrap-resolver-impl-maven -->
+		<dependency>
+		    <groupId>org.jboss.shrinkwrap.resolver</groupId>
+		    <artifactId>shrinkwrap-resolver-impl-maven</artifactId>
+		    <version>3.0.0</version>
+		    <scope>test</scope>
 		</dependency>
 
 		<!-- Import the JAX-RS/RestEasy Client: to run REST remotely! (outside Arq.) -->

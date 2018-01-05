@@ -20,16 +20,22 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement(name="project") 
+@XmlRootElement(name="patient") 
 @XmlAccessorType(XmlAccessType.NONE)
 @Entity
 public class Patient implements Serializable{
-	/* internal stucture: member fields*/
 	@Id 
 	private Integer patientid;
 	private String name;
-
+	@OneToMany(mappedBy="patient", cascade = ALL, fetch = EAGER, orphanRemoval = false)
+	private List<HospitalAdmission> hospitaladmission = new ArrayList<HospitalAdmission>();
+	
 	public Patient() {
 		super();
 	}
@@ -38,17 +44,26 @@ public class Patient implements Serializable{
 		this.patientid = patientid;
 		this.name = name;
 	}
+	@XmlElement
 	public Integer getPatientid() {
 		return patientid;
 	}
 	public void setPatientid(Integer patientid) {
 		this.patientid = patientid;
 	}
+	@XmlElement
 	public String getName() {
 		return name;
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+	@XmlElementWrapper(name = "admissions") @XmlElement(name = "hospitaladmission")
+	public List<HospitalAdmission> getHospitaladmission() {
+		return hospitaladmission;
+	}
+	public void setHospitaladmission(List<HospitalAdmission> hospitaladmission) {
+		this.hospitaladmission = hospitaladmission;
 	}
 	@Override
 	public int hashCode() {

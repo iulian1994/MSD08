@@ -29,12 +29,12 @@ public class EmployeeTaskDataServiceEJB extends EntityRepositoryBase<Employee>
 	
 	public Employee createNewEmployee(Integer id){
 		
-		Employee employee = new Employee(null, "NEW employee" + "." + id);
+		Employee employee = new Employee(id, "NEW employee" + "." + id);
 		List<Task> taskEmployee = new ArrayList<>();
 
-		Integer TaskCount = 3;
+		Integer TaskCount = 4;
 		for (int i=0; i<=TaskCount-1; i++){
-			taskEmployee.add(new Task(null, "R: " + employee.geteID() + "." + i));
+			taskEmployee.add(new Task(null, "Test-un milion de ani"+ i,employee));
 		}
 		employee.setTasks(taskEmployee); 		
 		
