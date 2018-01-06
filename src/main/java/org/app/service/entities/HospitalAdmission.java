@@ -96,4 +96,45 @@ public class HospitalAdmission implements Serializable {
         return new AtomLink(restUrl, "get-admissions");
     }	
 	public void setLink(AtomLink link){}
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((addmissionNo == null) ? 0 : addmissionNo.hashCode());
+		result = prime * result + ((medicalservice == null) ? 0 : medicalservice.hashCode());
+		result = prime * result + ((patient == null) ? 0 : patient.hashCode());
+		result = prime * result + ((startDate == null) ? 0 : startDate.hashCode());
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		HospitalAdmission other = (HospitalAdmission) obj;
+		if (addmissionNo == null) {
+			if (other.addmissionNo != null)
+				return false;
+		} else if (!addmissionNo.equals(other.addmissionNo))
+			return false;
+		if (medicalservice == null) {
+			if (other.medicalservice != null)
+				return false;
+		} else if (!medicalservice.equals(other.medicalservice))
+			return false;
+		if (patient == null) {
+			if (other.patient != null)
+				return false;
+		} else if (!patient.equals(other.patient))
+			return false;
+		if (startDate == null) {
+			if (other.startDate != null)
+				return false;
+		} else if (!startDate.equals(other.startDate))
+			return false;
+		return true;
+	}
 }

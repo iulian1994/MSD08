@@ -5,8 +5,8 @@
 		<class>org.app.service.entities.Diagnostic</class>
 		<class>org.app.service.entities.Employee</class>
 		<class>org.app.service.entities.HospitalAdmission</class>
+		<class>org.app.service.entities.MedicalActivity</class>
 		<class>org.app.service.entities.MedicalService</class>
-		<class>org.app.service.entities.MedicalTest</class>
 		<class>org.app.service.entities.Patient</class>
 		<class>org.app.service.entities.Task</class>
 		

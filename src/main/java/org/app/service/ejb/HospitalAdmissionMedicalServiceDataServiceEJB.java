@@ -18,7 +18,7 @@ import org.app.patterns.EntityRepository;
 import org.app.patterns.EntityRepositoryBase;
 import org.app.service.entities.HospitalAdmission;
 import org.app.service.entities.MedicalService;
-import org.app.service.entities.MedicalTest;
+
 
 
 @Stateless @LocalBean
@@ -27,7 +27,7 @@ implements HospitalAdmissionMedicalServiceDataService, Serializable {
 	private static Logger logger = Logger.getLogger(HospitalAdmissionMedicalServiceDataServiceEJB.class.getName());
 	
 	@EJB // injected DataService
-	private MedicalTestDataService medicaltestDataService; 
+	private MedicalActivityDataService medicaltestDataService; 
 	// Local component-entity-repository
 	private EntityRepository<MedicalService> medicalserviceRepository;
 	@PostConstruct

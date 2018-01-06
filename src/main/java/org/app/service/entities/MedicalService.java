@@ -37,19 +37,19 @@ public class MedicalService implements Serializable{
 	@Temporal(TemporalType.DATE)
 	private Date appliedDate;
 	
-	@ManyToOne
+	@ManyToOne /// trebuie lucrat aici!!
 	private HospitalAdmission hospitaladmission;
 
-	@OneToMany(mappedBy="medsrv",cascade = ALL, fetch=FetchType.EAGER)
-	private List<MedicalTest> medicaltest = new ArrayList<>();   //aici lucrezi
+	@OneToMany(mappedBy="rel_service", cascade = ALL, fetch = EAGER, orphanRemoval = false)
+	private List<MedicalActivity> medicalactivity = new ArrayList<>();   
 	
 	//@ManyToMany(mappedBy = "medicalservices")
 	//private List<Employee> employees = new ArrayList<>();
-	// REPARELE MAINE IN DMZ MAMI LOR
+
 	//@OneToOne
 	//@MapsId
     //private Diagnostic diagnostic;
-	
+	@XmlElement
 	public Integer getServiceId() {
 		return serviceId;
 	}
@@ -57,7 +57,7 @@ public class MedicalService implements Serializable{
 	public void setServiceId(Integer serviceId) {
 		this.serviceId = serviceId;
 	}
-
+	@XmlElement
 	public String getCodeName() {
 		return codeName;
 	}
@@ -65,7 +65,7 @@ public class MedicalService implements Serializable{
 	public void setCodeName(String codeName) {
 		this.codeName = codeName;
 	}
-
+	@XmlElement
 	public HospitalAdmission getHospitaladmission() {
 		return hospitaladmission;
 	}
@@ -73,15 +73,7 @@ public class MedicalService implements Serializable{
 	public void setHospitaladmission(HospitalAdmission hospitaladmission) {
 		this.hospitaladmission = hospitaladmission;
 	}
-
-	public List<MedicalTest> getMedicaltest() {
-		return medicaltest;
-	}
-
-	public void setMedicaltest(List<MedicalTest> medicaltest) {
-		this.medicaltest = medicaltest;
-	}
-
+	@XmlElement
 	public Date getAppliedDate() {
 		return appliedDate;
 	}
@@ -91,15 +83,22 @@ public class MedicalService implements Serializable{
 	public MedicalService() {
 		super();
 	}
+	@XmlElement
+	public List<MedicalActivity> getMedicalactivity() {
+		return medicalactivity;
+	}
 
-	
+	public void setMedicalactivity(List<MedicalActivity> medicalactivity) {
+		this.medicalactivity = medicalactivity;
+	}
+
 	public MedicalService(Integer serviceId, String codeName, HospitalAdmission hospitaladmission,
-			List<MedicalTest> medicaltest) {
+			List<MedicalActivity> medicalactivity) {
 		super();
 		this.serviceId = serviceId;
 		this.codeName = codeName;
 		this.hospitaladmission = hospitaladmission;
-		this.medicaltest = medicaltest;
+		this.medicalactivity = medicalactivity;
 	}
 	
 //cu asta lucrez in agregat!!!
@@ -115,15 +114,36 @@ public class MedicalService implements Serializable{
 			super();
 			this.serviceId = serviceId;
 			this.codeName = codeName;
-		}
+	}
 
+	public MedicalService(Integer serviceId, String codeName, Date appliedDate, HospitalAdmission hospitaladmission,
+			List<MedicalActivity> medicalactivity) {
+		super();
+		this.serviceId = serviceId;
+		this.codeName = codeName;
+		this.appliedDate = appliedDate;
+		this.hospitaladmission = hospitaladmission;
+		this.medicalactivity = medicalactivity;
+	}
+
+	/* Rest Resource URL*/
+	public static String BASE_URL = "http://localhost:8080/MSD-S3/data/medicalservices/";
+	@XmlElement(name = "link")
+    public AtomLink getLink() throws Exception {
+		String restUrl = BASE_URL + this.getServiceId();
+        return new AtomLink(restUrl, "get-medicalservices");
+    }	
+	
+	public void setLink(AtomLink link){}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((appliedDate == null) ? 0 : appliedDate.hashCode());
 		result = prime * result + ((codeName == null) ? 0 : codeName.hashCode());
 		result = prime * result + ((hospitaladmission == null) ? 0 : hospitaladmission.hashCode());
-		result = prime * result + ((medicaltest == null) ? 0 : medicaltest.hashCode());
+		result = prime * result + ((medicalactivity == null) ? 0 : medicalactivity.hashCode());
 		result = prime * result + ((serviceId == null) ? 0 : serviceId.hashCode());
 		return result;
 	}
@@ -137,6 +157,11 @@ public class MedicalService implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		MedicalService other = (MedicalService) obj;
+		if (appliedDate == null) {
+			if (other.appliedDate != null)
+				return false;
+		} else if (!appliedDate.equals(other.appliedDate))
+			return false;
 		if (codeName == null) {
 			if (other.codeName != null)
 				return false;
@@ -147,10 +172,10 @@ public class MedicalService implements Serializable{
 				return false;
 		} else if (!hospitaladmission.equals(other.hospitaladmission))
 			return false;
-		if (medicaltest == null) {
-			if (other.medicaltest != null)
+		if (medicalactivity == null) {
+			if (other.medicalactivity != null)
 				return false;
-		} else if (!medicaltest.equals(other.medicaltest))
+		} else if (!medicalactivity.equals(other.medicalactivity))
 			return false;
 		if (serviceId == null) {
 			if (other.serviceId != null)
@@ -159,7 +184,4 @@ public class MedicalService implements Serializable{
 			return false;
 		return true;
 	}
-	
-	
-	
 }
