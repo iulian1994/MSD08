@@ -9,6 +9,7 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -34,7 +35,8 @@ public class HospitalAdmission implements Serializable {
 	@Temporal(TemporalType.DATE)
 	private Date endDate;
 	private String diseases;
-	private double totalCost;
+	@Column(nullable = true)
+	private double totalCost = 0;
 	
 	@OneToMany(mappedBy = "hospitaladmission", cascade = ALL, fetch = EAGER, orphanRemoval = false)
 	private List<MedicalService> medicalservice = new ArrayList<>();
