@@ -1,5 +1,5 @@
 package org.app.service.entities;
-import java.util.Collection;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,8 +8,6 @@ import static javax.persistence.FetchType.EAGER;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
@@ -20,100 +18,107 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement(name="employee") 
+@XmlRootElement(name = "employee")
 @XmlAccessorType(XmlAccessType.NONE)
 @Entity
 public class Employee implements Serializable {
 
-@Id
-private Integer employeeID;
-private String name;
-private String surname;
-private String position; 
+	@Id
+	private Integer employeeID;
+	private String name;
+	private String surname;
+	private String position;
 
-@ManyToMany(cascade = { CascadeType.ALL })
-@JoinTable(name="Employee_MEDSRV")
-private List<MedicalService> medicalservices = new ArrayList<>();
+	@ManyToMany(cascade = { CascadeType.ALL })
+	@JoinTable(name = "Employee_MEDSRV")
+	private List<MedicalService> medicalservices = new ArrayList<>();
 
-@OneToMany(mappedBy="responsible", cascade = ALL, fetch = EAGER, orphanRemoval = false)
-private List<Task> tasks = new ArrayList<>();
+	@OneToMany(mappedBy = "responsible", cascade = ALL, fetch = EAGER, orphanRemoval = false)
+	private List<Task> tasks = new ArrayList<>();
 
+	public List<MedicalService> getMedicalservices() {
+		return medicalservices;
+	}
 
-public List<MedicalService> getMedicalservices() {
-	return medicalservices;
-}
+	public void setMedicalservices(List<MedicalService> medicalservices) {
+		this.medicalservices = medicalservices;
+	}
 
-public void setMedicalservices(List<MedicalService> medicalservices) {
-	this.medicalservices = medicalservices;
-}
-@XmlElementWrapper(name = "tasks") @XmlElement(name = "task")
-public List<Task> getTasks() {
-	return tasks;
-}
+	@XmlElementWrapper(name = "tasks")
+	@XmlElement(name = "task")
+	public List<Task> getTasks() {
+		return tasks;
+	}
 
-public void setTasks(List<Task> tasks) {
-	this.tasks = tasks;
-}
-@XmlElement
-public Integer getEmployeeID() {
-	return employeeID;
-}
+	public void setTasks(List<Task> tasks) {
+		this.tasks = tasks;
+	}
 
-public void setEmployeeID(Integer employeeID) {
-	this.employeeID = employeeID;
-}
-@XmlElement
-public String getName() {
-	return name;
-}
+	@XmlElement
+	public Integer getEmployeeID() {
+		return employeeID;
+	}
 
-public void setName(String name) {
-	this.name = name;
-}
-@XmlElement
-public String getSurname() {
-	return surname;
-}
+	public void setEmployeeID(Integer employeeID) {
+		this.employeeID = employeeID;
+	}
 
-public void setSurname(String surname) {
-	this.surname = surname;
-}
-@XmlElement
-public String getPosition() {
-	return position;
-}
+	@XmlElement
+	public String getName() {
+		return name;
+	}
 
-public void setPosition(String position) {
-	this.position = position;
-}
+	public void setName(String name) {
+		this.name = name;
+	}
 
+	@XmlElement
+	public String getSurname() {
+		return surname;
+	}
 
-@Override
-public int hashCode() {
-	final int prime = 31;
-	int result = 1;
-	result = prime * result + ((name == null) ? 0 : name.hashCode());
-	result = prime * result + ((position == null) ? 0 : position.hashCode());
-	result = prime * result + ((surname == null) ? 0 : surname.hashCode());
-	result = prime * result + ((tasks == null) ? 0 : tasks.hashCode());
-	return result;
-}
+	public void setSurname(String surname) {
+		this.surname = surname;
+	}
 
-public Employee(Integer employeeID, String name) {
-	super();
-	this.employeeID = employeeID;
-	this.name = name;
-}
+	@XmlElement
+	public String getPosition() {
+		return position;
+	}
 
-public Employee() {
-	super();
-}
-public static String BASE_URL = "http://localhost:8080/MSD-S3/data/employees/";
-@XmlElement(name = "link")
-public AtomLink getLink() throws Exception {
-	String restUrl = BASE_URL + this.getEmployeeID();
-    return new AtomLink(restUrl, "get-employee");
-}	
+	public void setPosition(String position) {
+		this.position = position;
+	}
 
-public void setLink(AtomLink link){}
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((position == null) ? 0 : position.hashCode());
+		result = prime * result + ((surname == null) ? 0 : surname.hashCode());
+		result = prime * result + ((tasks == null) ? 0 : tasks.hashCode());
+		return result;
+	}
+
+	public Employee(Integer employeeID, String name) {
+		super();
+		this.employeeID = employeeID;
+		this.name = name;
+	}
+
+	public Employee() {
+		super();
+	}
+
+	public static String BASE_URL = "http://localhost:8080/MSD-S3/data/employees/";
+
+	@XmlElement(name = "link")
+	public AtomLink getLink() throws Exception {
+		String restUrl = BASE_URL + this.getEmployeeID();
+		return new AtomLink(restUrl, "get-employee");
+	}
+
+	public void setLink(AtomLink link) {
+	}
 }

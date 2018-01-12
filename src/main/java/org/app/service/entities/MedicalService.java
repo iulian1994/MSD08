@@ -1,4 +1,5 @@
 package org.app.service.entities;
+
 import static javax.persistence.CascadeType.ALL;
 import static javax.persistence.FetchType.EAGER;
 
@@ -25,30 +26,32 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 
-
-@XmlRootElement(name="release")
+@XmlRootElement(name = "medicalservice")
 @XmlAccessorType(XmlAccessType.NONE)
 @Entity
-public class MedicalService implements Serializable{
-	@Id @GeneratedValue
+public class MedicalService implements Serializable {
+	@Id
+	@GeneratedValue
 	private Integer serviceId;
 	private String codeName;
-	
+	private String Description;
+	private double price;
+
 	@Temporal(TemporalType.DATE)
 	private Date appliedDate;
-	
+
 	@ManyToOne /// trebuie lucrat aici!!
 	private HospitalAdmission hospitaladmission;
 
-	@OneToMany(mappedBy="rel_service", cascade = ALL, fetch = EAGER, orphanRemoval = false)
-	private List<MedicalActivity> medicalactivity = new ArrayList<>();   
-	
-	//@ManyToMany(mappedBy = "medicalservices")
-	//private List<Employee> employees = new ArrayList<>();
+	@OneToMany(mappedBy = "rel_service", cascade = ALL, fetch = EAGER, orphanRemoval = false)
+	private List<MedicalActivity> medicalactivity = new ArrayList<>();
 
-	//@OneToOne
-	//@MapsId
-    //private Diagnostic diagnostic;
+	// @ManyToMany(mappedBy = "medicalservices")
+	// private List<Employee> employees = new ArrayList<>();
+
+	// @OneToOne
+	// @MapsId
+	// private Diagnostic diagnostic;
 	@XmlElement
 	public Integer getServiceId() {
 		return serviceId;
@@ -57,6 +60,7 @@ public class MedicalService implements Serializable{
 	public void setServiceId(Integer serviceId) {
 		this.serviceId = serviceId;
 	}
+
 	@XmlElement
 	public String getCodeName() {
 		return codeName;
@@ -65,6 +69,7 @@ public class MedicalService implements Serializable{
 	public void setCodeName(String codeName) {
 		this.codeName = codeName;
 	}
+
 	@XmlElement
 	public HospitalAdmission getHospitaladmission() {
 		return hospitaladmission;
@@ -73,16 +78,20 @@ public class MedicalService implements Serializable{
 	public void setHospitaladmission(HospitalAdmission hospitaladmission) {
 		this.hospitaladmission = hospitaladmission;
 	}
+
 	@XmlElement
 	public Date getAppliedDate() {
 		return appliedDate;
 	}
+
 	public void setAppliedDate(Date appliedDate) {
 		this.appliedDate = appliedDate;
 	}
+
 	public MedicalService() {
 		super();
 	}
+
 	@XmlElement
 	public List<MedicalActivity> getMedicalactivity() {
 		return medicalactivity;
@@ -90,6 +99,22 @@ public class MedicalService implements Serializable{
 
 	public void setMedicalactivity(List<MedicalActivity> medicalactivity) {
 		this.medicalactivity = medicalactivity;
+	}
+	@XmlElement
+	public String getDescription() {
+		return Description;
+	}
+
+	public void setDescription(String description) {
+		Description = description;
+	}
+	@XmlElement
+	public double getPrice() {
+		return price;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
 	}
 
 	public MedicalService(Integer serviceId, String codeName, HospitalAdmission hospitaladmission,
@@ -100,20 +125,21 @@ public class MedicalService implements Serializable{
 		this.hospitaladmission = hospitaladmission;
 		this.medicalactivity = medicalactivity;
 	}
-	
-//cu asta lucrez in agregat!!!
-		public MedicalService(Integer serviceId, String codeName, Date appliedDate, HospitalAdmission hospitaladmission) {
-	super();
-	this.serviceId = serviceId;
-	this.codeName = codeName;
-	this.appliedDate = appliedDate;
-	this.hospitaladmission = hospitaladmission;
-}
-	//PTR TEST LA MEDICALSERVICE
+
+	// cu asta lucrez in agregat!!!
+	public MedicalService(Integer serviceId, String codeName, Date appliedDate, HospitalAdmission hospitaladmission) {
+		super();
+		this.serviceId = serviceId;
+		this.codeName = codeName;
+		this.appliedDate = appliedDate;
+		this.hospitaladmission = hospitaladmission;
+	}
+
+	// PTR TEST LA MEDICALSERVICE
 	public MedicalService(Integer serviceId, String codeName) {
-			super();
-			this.serviceId = serviceId;
-			this.codeName = codeName;
+		super();
+		this.serviceId = serviceId;
+		this.codeName = codeName;
 	}
 
 	public MedicalService(Integer serviceId, String codeName, Date appliedDate, HospitalAdmission hospitaladmission,
@@ -126,16 +152,18 @@ public class MedicalService implements Serializable{
 		this.medicalactivity = medicalactivity;
 	}
 
-	/* Rest Resource URL*/
+	/* Rest Resource URL */
 	public static String BASE_URL = "http://localhost:8080/MSD-S3/data/medicalservices/";
+
 	@XmlElement(name = "link")
-    public AtomLink getLink() throws Exception {
+	public AtomLink getLink() throws Exception {
 		String restUrl = BASE_URL + this.getServiceId();
-        return new AtomLink(restUrl, "get-medicalservices");
-    }	
-	
-	public void setLink(AtomLink link){}
-	
+		return new AtomLink(restUrl, "get-medicalservices");
+	}
+
+	public void setLink(AtomLink link) {
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
