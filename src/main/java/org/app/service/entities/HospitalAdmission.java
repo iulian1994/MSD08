@@ -83,7 +83,7 @@ public class HospitalAdmission implements Serializable {
 	public void setStartDate(Date startDate) {
 		this.startDate = startDate;
 	}
-
+	@XmlElement
 	public List<MedicalService> getMedicalservice() {
 		return medicalservice;
 	}
@@ -124,6 +124,8 @@ public class HospitalAdmission implements Serializable {
 	public void setTotalCost(double totalCost) {
 		this.totalCost = totalCost;
 	}
+	
+	
 
 	public static String BASE_URL = Patient.BASE_URL;
 

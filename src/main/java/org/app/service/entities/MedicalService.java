@@ -31,7 +31,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Entity
 public class MedicalService implements Serializable {
 	@Id
-	@GeneratedValue
+	//@GeneratedValue testam!!!!!!!!! ERROR
 	private Integer serviceId;
 	private String codeName;
 	private String Description;
@@ -43,7 +43,7 @@ public class MedicalService implements Serializable {
 	@ManyToOne /// trebuie lucrat aici!!
 	private HospitalAdmission hospitaladmission;
 
-	@OneToMany(mappedBy = "rel_service", cascade = ALL, fetch = EAGER, orphanRemoval = false)
+	@OneToMany(mappedBy = "rel_service", cascade = ALL, fetch = EAGER)
 	private List<MedicalActivity> medicalactivity = new ArrayList<>();
 
 	// @ManyToMany(mappedBy = "medicalservices")
@@ -70,7 +70,7 @@ public class MedicalService implements Serializable {
 		this.codeName = codeName;
 	}
 
-	@XmlElement
+//	@XmlElement
 	public HospitalAdmission getHospitaladmission() {
 		return hospitaladmission;
 	}
