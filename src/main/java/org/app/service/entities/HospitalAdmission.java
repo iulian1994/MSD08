@@ -196,5 +196,4 @@ public class HospitalAdmission implements Serializable {
 			return false;
 		return true;
 	}
-
 }

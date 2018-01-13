@@ -78,7 +78,7 @@ implements Patient1DataService{
 		// return updated collection
 		return super.toCollection();
 	}
-	// nu e bun in dmz masi...
+	// 
 	@PUT @Path("/{id}") 	/* MSD-S4/data/projects/{id} 	REST-resource: project-entity*/	
 	@Consumes({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
 	@Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })	
